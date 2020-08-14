@@ -1,0 +1,70 @@
+<!-- ヘッダーの呼び出し -->
+<%= render "layouts/header" %>
+
+<!-- 会員情報編集フォーム -->
+<div class ="container">
+<span class="sentence_backcolor" >&nbsp;&nbsp;&nbsp;登録情報編集&nbsp;&nbsp;&nbsp;</span>
+
+<!-- 名前とフリガナ -->
+<%= form_for(@customer) do |f| %>
+
+  <%= f.label :名前 %><br />
+    <div class ="row">
+      <div class="col-sm-3">
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;(姓) <%= f.text_field :last_name %></p>
+      </div>
+      <div class="col-sm-3">
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;(名) <%= f.text_field :first_name %></p>
+      </div>
+    </div>
+
+  <%= f.label :フリガナ %><br />
+    <div class ="row">
+      <div class="col-sm-3">
+        <p>(セイ) <%= f.text_field :last_name_phonetic %></p>
+      </div>
+      <div class="col-sm-3">
+        <p>(メイ) <%= f.text_field :first_name_phonetic %></p>
+      </div>
+    </div>
+
+
+<!-- メールアドレス -->
+  <div class="field">
+    <%= f.label :メールアドレス %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+<!-- 郵便番号 -->
+  <div class="field">
+    <%= f.label :郵便番号%><br />
+    <%= f.text_field :postal_code %>
+  </div>
+
+<!-- 住所 -->
+<div class="row">
+  <div class="col-xs-6">
+    <%= f.label :住所%><br />
+    <%= f.text_field :address, class:"form-control" %>
+  </div>
+</div>
+
+<!-- 電話番号 -->
+  <div class="field">
+    <%= f.label :電話番号%><br />
+    <%= f.text_field :phone_number %>
+  </div>
+<br>
+  <div class="actions">
+  	<div class ="row">
+  		<div class="col-sm-3">
+    	<%= f.submit "編集内容を保存する", class:"btn btn-primary" %>
+    	</div>
+    	<div class="col-sm-3">
+    	<%= link_to "退会する","#", class:"btn btn-danger" %>
+		</div>
+    </div>
+  </div>
+<% end %>
+
+
