@@ -1,0 +1,77 @@
+<!-- ヘッダーの呼び出し -->
+<%= render "layouts/header" %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-offset-2">
+			<h2>注文履歴詳細</h2>
+		</div>
+	</div>
+	<br>
+
+	<div class="row">
+		<div class="col-offset-1 col-md-6">
+			<label>注文情報</label>
+			<table class="table table-bordered">
+					<tr>
+						<th class="info">注文日</th>
+						<td><%= @order.created_at %></td>
+					</tr>
+					<tr>
+						<th class="info">配送先</th>
+						<td><%= @order.address %></td>
+					</tr>
+					<tr>
+						<th class="info">支払方法</th>
+						<td><%= @order.how_to_pay%></td>
+					</tr>
+					<tr>
+						<th class="info">ステータス</th>
+						<td><%= @order_item.productal_status %></td>
+					</tr>
+			</table>
+		</div>
+		<div class="col-md-4">
+			<label>請求情報</label>
+			<table class="table table-bordered">
+					<tr>
+						<th class="info">商品合計</th>
+						<td>¥<%= @order.amount_billed - @order.postage %></td>
+					</tr>
+					<tr>
+						<th class="info">配送料</th>
+						<td>¥<%= @order.postage %></td>
+					</tr>
+					<tr>
+						<th class="info">ご請求額</th>
+						<td>¥<%= @order.amount_billed %></td>
+					</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-offset-1 col-md-9">
+			<label>注文内容</label>
+			<table class="table table-bordered">
+					<tr class="info">
+						<th>商品</th>
+						<th>単価</th>
+						<th>個数</th>
+						<th>小計</th>
+					</tr>
+					<tr>
+					<% @order.order_items.each do |order_item| %>
+						<td><%= order_item.item.product_name %></td>
+						<td><%= price_contain_tax = (BigDecimal(order_item.price) * BigDecimal("1.08")).round %></td>
+						<td><%= order_item.amount %></td>
+						<td><%= price_contain_tax * order_item.amount %></td>
+					</tr>
+					<% end %>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+<footer></footer>

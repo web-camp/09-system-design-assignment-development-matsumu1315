@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_12_095648) do
+ActiveRecord::Schema.define(version: 2020_08_24_013606) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "customer_id"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2020_08_12_095648) do
     t.string "last_name_phonetic"
     t.string "first_name_phonetic"
     t.string "postal_code"
-    t.string "address"
+    t.string "self_address"
     t.string "phone_number"
     t.boolean "is_deleated", default: false
     t.datetime "created_at", null: false
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2020_08_12_095648) do
 
   create_table "items", force: :cascade do |t|
     t.integer "genre_id"
-    t.string "name"
+    t.string "product_name"
     t.string "image_id"
     t.text "explanation"
     t.integer "price"
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2020_08_12_095648) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "customer_id"
-    t.integer "postage"
+    t.integer "postage", default: 800
     t.integer "amount_billed"
     t.integer "how_to_pay"
     t.integer "status"

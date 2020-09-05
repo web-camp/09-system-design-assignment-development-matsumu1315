@@ -1,0 +1,94 @@
+<!-- ヘッダーの呼び出し -->
+<%= render "layouts/admin_header" %>
+
+<div class="contain">
+
+	<div class="row">
+		<div class="col-md-offset-2">
+			<h3>注文履歴詳細</h3>
+		</div>
+	</div><br>
+
+	<!-- 注文履歴詳細 -->
+	<div class="row">
+		<div class="col-md-offset-1 col-md-9">
+			<table>
+				<tr>
+					<td>購入者</td>
+					<td><%= @order.customer.last_name + @order.customer.first_name %></td>
+				</tr>
+				<tr>
+					<td>配送先</td>
+					<td><%= @order.postal_code %>&emsp;<%= @order.address %>&emsp;<%= @order.name %></td>
+				</tr>
+				<tr>
+					<td>支払方法</td>
+					<td><%= @order.how_to_pay %></td>
+				</tr>
+				<tr>
+					<td>注文ステータス&emsp;</td>
+					<td><%= form_for @order, url:admin_order_path(@order.id), method: :patch do |f| %>
+						<%= f.select :status, [["入金待ち", "入金待ち"], ["入金確認", "入金確認"], ["製作中
+							", "製作中"], ["発送待ち", "発送待ち"], ["発送済み", "発送済み"]] %>
+						<%= f.submit "更新", class:"btn btn-primary" %>
+						<% end %>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+<br> 
+	<!-- 商品一覧 -->
+	<div class="row">
+		<div class="col-md-offset-1 col-md-6">
+			<table class="table">
+				<tbody>
+					<tr class="info">
+					    <th>商品名</th>
+					    <th>単価（税込）</th>
+					    <th>数量</th>
+					    <th>小計</th>
+					    <th>製作ステータス</th>
+					</tr>
+<% @sum = 0 %>
+					<% @order_items.each do |order_item| %>
+					<tr>
+						<td><%= order_item.item.product_name %></td>
+						<td>¥<%= price_contain_tax = (BigDecimal(order_item.item.price) * BigDecimal("1.08")).round %></td>
+						<td><%= order_item.amount %></td>
+						<td>¥<%= total_price = price_contain_tax * order_item.amount %></td>
+						<% @sum = @sum + total_price %>
+						<td><%= form_for order_item, url:admin_order_order_item_path(@order.id, order_item.id), method: :patch do |f| %>
+							<%= f.select :productal_status, [["製作不可", "製作不可"], ["製作待ち", "製作待ち"], ["製作中", "製作中"], ["製作完了", "製作完了"]] %>
+							<%= f.submit "更新", class:"btn btn-primary" %>
+							<% end %>
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- 合計金額 -->
+		<div class="col-md-4">
+			<table class="table">
+				<tr>
+					<th>商品合計</th>
+					<td>¥<%= @sum %></td>
+				</tr>
+				<tr>
+					<th>送料</th>
+					<td>¥<%= @order.postage %></td>
+				</tr>
+				<tr>
+					<th>請求金額合計</th>
+					<td>¥<%= @sum + @order.postage %></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+
+<footer></footer>

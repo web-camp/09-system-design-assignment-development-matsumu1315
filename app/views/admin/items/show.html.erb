@@ -1,0 +1,64 @@
+<!-- ヘッダーの呼び出し -->
+<%= render "layouts/admin_header" %>
+
+<div class="contaniner">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-2">
+			<h1>商品詳細</h1>
+		</div>
+	</div><br>
+
+	<div class="row">
+		<!-- 商品画像 -->
+		<div class="col-md-offset-1 col-md-5">
+			<%= attachment_image_tag @item, :image, :fill, 450, 300, format:'jpeg', fallback: "no_image.jpg", size: '450x300' %>
+		</div>
+
+		<!-- 商品詳細情報のテーブル -->
+		<div class="col-md-5">
+			<table class="table table-bordered">
+				<tbody>
+
+					<!-- 商品名 -->
+					<tr>
+					    <th class="info col-md-3">商品名</th>
+						<td><%= @item.product_name %></td>
+					</tr>
+
+					<!-- 商品説明 -->
+					<tr>
+						<th class="info">商品説明</th>
+						<td><%= @item.explanation %></td>
+					</tr>
+
+					<!-- ジャンル -->
+					<tr>
+						<th class="info">ジャンル</th>
+						<td><%= @item.genre.name %></td>
+					</tr>
+
+					<!-- 価格 -->
+					<tr>
+						<th class="info">税抜価格</th>
+						<td><%= @item.price %>円</td>
+					</tr>
+
+					<!-- 販売ステータス -->
+					<tr>
+						<th class="info">販売ステータス</th>
+						<td><% if @item.status? %>
+							<p>販売中</p>
+							<% else %>
+							<p>売り切れ</p>
+							<% end%>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			    <br>
+			    <%= link_to "編集する", edit_admin_item_path(@item.id), data: {"turbolinks"=>false}, class:"btn btn-primary" %>
+		</div>
+	</div>
+
+
+</div>

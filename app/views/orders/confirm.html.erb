@@ -1,0 +1,97 @@
+<!-- ヘッダーの呼び出し -->
+<%= render "layouts/header" %>
+
+<div class="contain">
+
+	<div class="row">
+		<div class="col-md-offset-2 col-md-5">
+		<span class="sentence_backcolor">注文情報確認</span>
+		</div>
+	</div><br>
+
+	<!-- 注文情報確認のテーブル -->
+	<div class="row">
+		<div class="col-md-offset-1 col-md-6">
+			<table class="table table-bordered">
+				<tbody>
+					<tr class="info">
+					    <th>商品名</th>
+					    <th>単価(税込)</th>
+					    <th>数量</th>
+					    <th>小計</th>
+					</tr>
+<% @sum = 0 %>
+						<% @cart_items.each do |cart_item| %>
+					<tr>
+						<td><%= cart_item.item.product_name %></td>
+						<td><%= "¥#{price_contain_tax = (BigDecimal(cart_item.item.price) * BigDecimal("1.08")).round}" %></td>
+						<td><%= total_amount = cart_item.amount %></td>
+						<td><%= "¥#{price_contain_tax * total_amount}" %></td>
+						<% @sum = @sum + (price_contain_tax * total_amount) %>
+						<% end %>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="col-md-offset-1 col-md-3">
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+					    <th class="info">送料</th>
+					    <td>¥800</td>
+					</tr>
+					<tr>
+					    <th class="info">商品合計</th>
+					    <td><%= "¥#{@sum}" %></td>
+					</tr>
+					<tr>
+					    <th class="info">請求金額</th>
+					    <td><%= "¥#{@sum + 800}"%></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-offset-1 col-md-3">
+		    <strong>支払方法</strong>&emsp;<%= @order.how_to_pay %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-offset-1 col-md-5">
+		    <strong>お届け先</strong>&emsp;<%= @order.postal_code %>&emsp;<%= @order.address %>&emsp;<%= @order.name %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-offset-1 col-md-3">
+	<%= form_for(@order) do |f| %>
+		<%= f.hidden_field :customer_id, :value => current_customer.id %>
+		<%= f.hidden_field :how_to_pay %>
+		<%= f.hidden_field :postage %>
+		<%= f.hidden_field :amount_billed, :value => @sum + 800 %>
+		<%= f.hidden_field :status, :value => "入金待ち" %>
+		<%= f.hidden_field :postal_code %>
+		<%= f.hidden_field :address %>
+		<%= f.hidden_field :name %>
+		<%= link_to "購入情報入力へ戻る", new_order_path, class: "btn btn-secondary"%>
+		<%= f.submit "購入を確定する", class: "btn btn-primary" %>
+	<% end %>
+		</div>
+	</div>
+
+</div>
+
+
+<footer></footer>
+
+
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+<!-- ヘッダーの呼び出し -->
+<%= render "layouts/admin_header" %>
+
+<div class="contaniner">
+
+	<div class="row">
+		<div class="col-md-offset-2 col-md-2">
+		<span class="sentence_backcolor">商品一覧</span>
+		</div>
+		<div class="col-md-4">
+		<%= link_to "新規登録", "/admin/items/new", class:"btn btn-primary btn-lg" %>
+		</div>
+	</div><br>
+
+	<!-- 商品一覧テーブル -->
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>商品ID</th>
+						<th>商品名</th>
+						<th>税抜価格</th>
+						<th>ジャンル</th>
+						<th>ステータス</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @items.each do |item| %>
+					<tr>
+						<td><%= item.id %></td>
+						<td><%= link_to admin_item_path(item.id) do %><%= item.product_name %><% end %></td>
+						<td><%= item.price %></td>
+						<td><%= item.genre.name %></td>
+						<td><% if item.status? %>
+							<p>販売中</p>
+							<% else %>
+							<p>売り切れ</p>
+							<% end%>
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+	    </div>
+	</div>
+
+</div>

@@ -68,3 +68,9 @@ gem "refile-mini_magick"
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
+
+gem 'paranoia', '~> 2.3', '>= 2.3.1'
+
+gem 'pry-byebug'
+
+gem 'jquery-turbolinks'

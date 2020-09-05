@@ -1,0 +1,31 @@
+<!-- ヘッダーの呼び出し -->
+<%= render "layouts/admin_header" %>
+
+<div class="contaniner">
+
+	<!-- 新規ジャンル登録フォーム -->
+	<div class="row">
+		<div class="col-md-offset-1 col-md-2">
+			<span class="sentence_backcolor">ジャンル編集</span>
+		</div>
+	</div><br>
+
+	<div class="row">
+		<div class="col-md-offset-2 col-md-10">
+			<%= form_for(@genre,url: {controller: "genres", action: "update" }) do |f| %>
+				<div class="col-md-2">
+					<%= f.text_field :name %>
+				</div>
+				<div class="col-md-2">
+					<%= f.radio_button :available, :true %> 有効 <%= f.radio_button :available, :false %> 無効
+			    </div>
+				<div class="col-md-1">
+					<div class="actions">
+				    <p><%= f.submit "変更を保存する", data: {"turbolinks" => false}, class:"btn btn-primary" %></p>
+				  	</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+
+</div>

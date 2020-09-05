@@ -4,22 +4,22 @@
 <div class="contaniner">
 
 	<div class="row">
-		<div class="col-md-offset-1 col-xs-10">
+		<div class="col-md-offset-1 col-md-10">
 		<span class="sentence_backcolor">マイページ</span><br>
 		<span>登録情報
 		<%= link_to "編集する", edit_customer_path(current_customer.id), class:"btn btn-primary" %>
-		<%= link_to "パスワードを変更する", "#", class:"btn btn-primary" %>
+		<%= link_to "パスワードを変更する", edit_customer_password_path, class:"btn btn-primary" %>
 		</span>
 		</div>
 	</div>
     <br>
 	<!-- 会員情報のテーブル -->
 	<div class="row">
-		<div class="col-md-offset-1 col-xs-6">
+		<div class="col-md-offset-1 col-md-7">
 			<table class="table table-bordered">
 				<tbody>
 					<tr>
-						<th class="info col-xs-2">氏名</th>
+						<th class="info col-md-3">氏名</th>
 						<td><%= @customer.last_name %>&nbsp<%= @customer.first_name %></td>
 					</tr>
 					<tr>
@@ -32,7 +32,7 @@
 					</tr>
 					<tr>
 						<th class="info">住所</th>
-						<td><%= @customer.address %></td>
+						<td><%= @customer.self_address %></td>
 					</tr>
 					<tr>
 						<th class="info">電話番号</th>
@@ -47,4 +47,25 @@
 		</div>
 	</div>
 
+	<div class="row">
+		<div class="col-md-offset-1">
+			<label class="col-md-1">配送先</label><%= link_to "一覧を見る", addresses_path, class:"btn btn-primary" %>
+		</div>
+	</div>
+    <br>
+	<div class="row">
+		<div class="col-md-offset-1">
+			<label class="col-md-1">注文履歴</label><%= link_to "一覧を見る", orders_path, class:"btn btn-primary" %>
+		</div>
+	</div>
+
 </div>
+
+<footer></footer>
+
+
+
+
+
+
+

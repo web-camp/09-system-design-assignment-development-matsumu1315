@@ -1,0 +1,91 @@
+<!-- ヘッダーの呼び出し -->
+<%= render "layouts/admin_header" %>
+
+<div class="contaniner">
+
+	<div class="row">
+		<div class="col-md-offset-1 col-md-2">
+			<span class="sentence_backcolor">商品新規登録</span>
+		</div>
+	</div>
+
+	<!-- 商品新規登録フォーム -->
+	<div class="row">
+		<div class="col-md-offset-4 col-md-5">
+		<%= form_for([:admin, @item]) do |f| %>
+
+
+	        <!-- 商品名 -->
+			<div class ="row">
+			    <div class="col-md-3">
+			        <p>商品名</p>
+			    </div>
+			    <div class="col-md-2">
+			        <%= f.text_field :product_name %>
+			    </div>
+			</div>
+
+	        <!-- 商品画像 -->
+			<div class ="row">
+			    <div class="col-md-3">
+			        <p>商品画像</p>
+			    </div>
+			    <div class="col-md-2">
+			        <%= f.attachment_field :image %>
+			    </div>
+			</div>
+
+	        <!-- 商品説明 -->
+			<div class ="row">
+			    <div class="col-md-3">
+			        <p>商品説明</p>
+			    </div>
+			    <div class="col-md-2">
+			        <%= f.text_area :explanation %>
+			    </div>
+			</div>
+
+	        <!-- ジャンル -->
+			<div class ="row">
+			    <div class="col-md-3">
+			        <p>ジャンル</p>
+			    </div>
+			    <div class="col-md-2">
+			        <%= f.collection_select :genre_id, @genres, :id, :name %>
+			    </div>
+			</div>
+
+	        <!-- 税抜価格 -->
+			<div class ="row">
+			    <div class="col-md-3">
+			        <p>税抜価格</p>
+			    </div>
+			    <div class="col-md-2">
+			        <%= f.number_field :price %>
+			    </div>
+			</div>
+
+	        <!-- 販売ステータス -->
+			<div class ="row">
+			    <div class="col-md-3">
+			        <p>販売ステータス</p>
+			    </div>
+			    <div class="col-md-2">
+			        <%= f.select :status, [["販売中","true"],["売り切れ","false"]],class:"form-control"%>
+			    </div>
+			</div><br>
+
+			<!-- 送信ボタン -->
+			<div class ="row">
+				<div class="col-md-offset-3 col-md-1">
+					<div class="actions">
+			    	<p><%= f.submit "新規登録", class:"btn btn-primary btn-lg" %></p>
+			  		</div>
+				</div>
+			</div>
+
+		<% end %>
+		</div>
+	</div>
+
+</div>

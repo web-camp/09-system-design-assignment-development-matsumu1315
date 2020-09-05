@@ -1,2 +1,60 @@
-<h1>Items#show</h1>
-<p>Find me in app/views/items/show.html.erb</p>
+<!-- ヘッダーの呼び出し -->
+<%= render "layouts/header" %>
+
+<div class="contaniner">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-5">
+			<h3>商品詳細</h3>
+		</div>
+	</div><br>
+
+	<div class="row">
+		<!-- 商品画像 -->
+		<div class="col-md-offset-2 col-md-5">
+			<%= attachment_image_tag @item, :image, :fill, 450, 300, format:'jpeg', fallback: "no_image.jpg", size: '450x300' %>
+		</div>
+
+		<!-- 商品詳細情報のテーブル -->
+		<div class="col-md-4">
+			<table>
+				<tbody>
+
+					<!-- 商品名 -->
+					<tr>
+						<td><h2><%= @item.product_name %></h2></td>
+					</tr>
+
+					<!-- 商品説明 -->
+					<tr>
+						<td class="item_explanation"><%= @item.explanation %></td>
+					</tr>
+
+					<!-- 価格 -->
+					<tr>
+						<td><h3>￥<%= (BigDecimal(@item.price) * BigDecimal("1.08")).round %>円(税込)</h3></td>
+					</tr>
+
+				</tbody>
+			</table>
+			    <br>
+			    <% if customer_signed_in? %>
+				    <%= form_for(@cart_item) do |f| %>
+				    	<% if @item.status == true %>
+						    <%= f.number_field :amount, min:1, max:9999, size:20 %>
+						    <%= f.hidden_field :item_id, :value => @item.id %>
+							<%= f.submit "カートに入れる", class:"btn btn-primary" %>
+						<% else %>
+							<h3>売り切れ中 Sorry...</h3>
+						<% end %>
+				    <% end %>
+			    <% end %>
+		</div>
+	</div>
+
+
+</div>
+
+<footer></footer>
+
+
+

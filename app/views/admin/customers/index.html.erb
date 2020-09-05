@@ -1,0 +1,41 @@
+<!-- ヘッダーの呼び出し -->
+<%= render "layouts/admin_header" %>
+
+<div class="contaniner">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-2">
+			<p>会員一覧</p>
+		</div>
+	</div>
+		<!-- ジャンル　一覧テーブル -->
+	<div class="row">
+		<div class="col-md-offset-2 col-md-5">
+				<table class="table">
+				<thead>
+					<tr>
+						<th>会員ID</th>
+						<th>氏名</th>
+						<th>メールアドレス</th>
+						<th>ステータス</th>
+					</tr>
+				</thead>
+				<tbody>
+				<% @customers.each do |customer| %>
+					<tr>
+						<td><%= customer.id %></td>
+						<td><%= link_to admin_customer_path(customer.id) do %><%= customer.last_name %><%= customer.first_name %><% end %></td>
+						<td><%= customer.email %></td>
+						<td><% if customer.is_deleated? %>
+								<p>退会済み</p>
+							<% else %>
+								<p>有効</p>
+							<% end%>
+						</td>
+					</tr>
+				<% end %>
+				</tbody>
+				</table>
+	    </div>
+	</div>
+
+</div>

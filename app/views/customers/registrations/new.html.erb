@@ -1,82 +1,74 @@
 <!-- ヘッダーの呼び出し -->
 <%= render "layouts/header" %>
 
-<!-- 会員情報入力フォーム -->
-<div class ="container">
-<span class="sentence_backcolor" >&nbsp;&nbsp;&nbsp;新規会員登録&nbsp;&nbsp;&nbsp;</span>
-
-<!-- 名前とフリガナ -->
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "customers/shared/error_messages", resource: resource %>
-
-  <%= f.label :名前 %><br />
-    <div class ="row">
-      <div class="col-sm-6">
-        <p>(姓) <%= f.text_field :last_name %></p>
-      </div>
-      <div class="col-sm-6">
-        <p>(姓) <%= f.text_field :first_name %></p>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-1 col-md-5">
+      <span class="sentence_backcolor" >新規会員登録</span>
     </div>
+  </div>
 
-  <%= f.label :フリガナ %><br />
-    <div class ="row">
-      <div class="col-sm-6">
-        <p>(セイ) <%= f.text_field :last_name_phonetic %></p>
-      </div>
-      <div class="col-sm-6">
-        <p>(メイ) <%= f.text_field :first_name_phonetic %></p>
-      </div>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "customers/shared/error_messages", resource: resource %>
+
+        <table class="sign_up_form">
+          <tr>
+              <td><%= f.label :名前 %></td>
+              <td><%= f.text_field :last_name, :placeholder => "姓" %></td>
+              <td><%= f.text_field :first_name, :placeholder => "名" %></td>
+          </tr>
+
+          <tr>
+              <td><%= f.label :フリガナ %></td>
+              <td><%= f.text_field :last_name_phonetic, :placeholder => "セイ" %></td>
+              <td><%= f.text_field :first_name_phonetic, :placeholder => "メイ" %></td>
+          </tr>
+
+          <tr>
+              <td><%= f.label :メールアドレス %></td>
+              <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+          </tr>
+
+          <tr>
+            <td><%= f.label :郵便番号%></td>
+            <td><%= f.text_field :postal_code, :placeholder => "ハイフンなし" %></td>
+          </tr>
+
+          <tr>
+            <td><%= f.label :住所%></td>
+            <td><%= f.text_field :self_address, :size => "40px" %></td>
+          </tr>
+
+          <tr>
+            <td><%= f.label :電話番号%></td>
+            <td><%= f.text_field :phone_number, :placeholder => "ハイフンなし" %></td>
+          </tr>
+
+          <tr>
+            <td><%= f.label :パスワード %></td>
+            <td><%= f.password_field :password, autocomplete: "new-password" %><% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> 文字以上)</em>
+            <% end %></td>
+          </tr>
+
+          <tr>
+          <td><%= f.label :パスワード確認用 %></td>
+          <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= f.submit "新規登録", class:"btn btn-default btn-lg btn-block active btn-success" %></td>
+          </tr>
+        </table>
+      <% end %>
     </div>
-
-
-<!-- メールアドレス -->
-  <div class="field">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
-<!-- 郵便番号 -->
-  <div class="field">
-    <%= f.label :郵便番号%><br />
-    <%= f.text_field :postal_code %>
-  </div>
+    <span class="sentence_backcolor">すでに登録済みの方</span>
+     <div><%= link_to "こちら", new_session_path(resource_name) %><span>からログインを行なってください。</span>
 
-<!-- 住所 -->
-<div class="row">
-  <div class="col-xs-6">
-    <%= f.label :住所%><br />
-    <%= f.text_field :address, class:"form-control" %>
-  </div>
 </div>
-
-<!-- 電話番号 -->
-  <div class="field">
-    <%= f.label :電話番号%><br />
-    <%= f.text_field :phone_number %>
-  </div>
-
-<!-- パスワード入力 -->
-  <div class="field">
-    <%= f.label :パスワード %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> 文字以上)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-<!-- パスワード確認 -->
-  <div class="field">
-    <%= f.label :パスワード確認用 %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "新規登録", class:"btn btn-success" %>
-  </div>
-<% end %>
-
-<span class="sentence_backcolor">&nbsp;&nbsp;&nbsp;すでに登録済みの方&nbsp;&nbsp;&nbsp;</span>
- <div><%= link_to "こちら", new_session_path(resource_name) %><span>       から新規登録を行なってください。</span></div>
 
 

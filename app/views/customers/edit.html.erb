@@ -5,55 +5,59 @@
 <div class ="container">
 <span class="sentence_backcolor" >&nbsp;&nbsp;&nbsp;登録情報編集&nbsp;&nbsp;&nbsp;</span>
 
-<!-- 名前とフリガナ -->
-<%= form_for(@customer) do |f| %>
+<div class ="row">
+  <div class="col-offset-1">
+    <table class="customer_edit_table">
+    <%= form_for(@customer) do |f| %>
+      <tr>
+        <td class="col-md-3">名前</td>
+        <td>(姓)</td>
+        <td><%= f.text_field :last_name %></td>
+        <td>(名)</td>
+        <td><%= f.text_field :first_name %></td>
+      </tr>
 
-  <%= f.label :名前 %><br />
-    <div class ="row">
-      <div class="col-sm-3">
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;(姓) <%= f.text_field :last_name %></p>
-      </div>
-      <div class="col-sm-3">
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;(名) <%= f.text_field :first_name %></p>
-      </div>
-    </div>
+      <tr>
+        <td class="col-md-3">フリガナ</td>
+        <td>(セイ)</td>
+        <td><%= f.text_field :last_name_phonetic %></td>
+        <td>(メイ)</td>
+        <td><%= f.text_field :first_name_phonetic %></td>
+      </tr>
 
-  <%= f.label :フリガナ %><br />
-    <div class ="row">
-      <div class="col-sm-3">
-        <p>(セイ) <%= f.text_field :last_name_phonetic %></p>
-      </div>
-      <div class="col-sm-3">
-        <p>(メイ) <%= f.text_field :first_name_phonetic %></p>
-      </div>
-    </div>
+      <tr>
+        <td class="col-md-3">メールアドレス</td>
+        <td></td>
+        <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+        <td></td>
+        <td></td>
+      </tr>
 
+      <tr>
+        <td class="col-md-3">郵便番号</td>
+        <td></td>
+        <td><%= f.text_field :postal_code %></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-<!-- メールアドレス -->
-  <div class="field">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <tr>
+        <td class="col-md-3">住所</td>
+        <td></td>
+        <td><%= f.text_field :self_address, class:"address_form" %></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-<!-- 郵便番号 -->
-  <div class="field">
-    <%= f.label :郵便番号%><br />
-    <%= f.text_field :postal_code %>
-  </div>
+      <tr>
+        <td class="col-md-3">電話番号</td>
+        <td></td>
+        <td><%= f.text_field :phone_number %></td>
+        <td></td>
+        <td></td>
+      </tr>
 
-<!-- 住所 -->
-<div class="row">
-  <div class="col-xs-6">
-    <%= f.label :住所%><br />
-    <%= f.text_field :address, class:"form-control" %>
-  </div>
-</div>
-
-<!-- 電話番号 -->
-  <div class="field">
-    <%= f.label :電話番号%><br />
-    <%= f.text_field :phone_number %>
-  </div>
+</table>
 <br>
   <div class="actions">
   	<div class ="row">
@@ -61,8 +65,8 @@
     	<%= f.submit "編集内容を保存する", class:"btn btn-primary" %>
     	</div>
     	<div class="col-sm-3">
-    	<%= link_to "退会する","#", class:"btn btn-danger" %>
-		</div>
+    	<%= link_to "退会する",customers_goodbye_path, class:"btn btn-danger" %>
+		  </div>
     </div>
   </div>
 <% end %>

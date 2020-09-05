@@ -1,0 +1,24 @@
+<!-- ヘッダーの呼び出し -->
+<%= render "layouts/admin_header" %>
+
+<div class="contain">
+
+	<div class="row">
+		<div class="col-md-offset-2">
+			<h3>管理者画面</h3>
+		</div>
+	</div><br>
+
+	<div class="row">
+		<div class="col-md-offset-2">
+			<h3>本日の注文件数</h3>
+			<%= link_to admin_orders_path do %>
+				<h3><%= @order_count %>件</h3>
+			<% end %>
+		</div>
+	</div>
+
+</div>
+
+<footer></footer>
+

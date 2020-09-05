@@ -1,0 +1,36 @@
+<nav class="navbar navbar-default navbar-static-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"data-toggle="collapse"data-target="#navbarEexample10">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">
+				Nagano Cake
+			</a>
+		</div>
+
+		<div class="collapse navbar-collapse" id="navbarEexample10">
+			<!-- ログイン中 -->
+			<% if admin_signed_in? %>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/admin/items">商品一覧</a></li>
+					<li><a href="/admin/customers">会員一覧</a></li>
+					<li><a href="/admin/orders">注文履歴一覧</a></li>
+					<li><a href="/admin/genres">ジャンル一覧</a></li>
+					<li><a href="/admins/sign_out" data-method="delete" >ログアウト</a></li>
+				</ul>
+			<% else %>
+			<!-- ログアウト中 -->
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/home/about">About</a></li>
+					<li><a href="/items">商品一覧</a></li>
+					<li><a href="/customers/sign_up">新規登録</a></li>
+					<li><a href="/customers/sign_in">ログイン</a></li>
+				</ul>
+			<% end %>
+		</div>
+	</div>
+</nav>
